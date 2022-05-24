@@ -3,4 +3,5 @@ from blog_app import views
 
 urlpatterns = [
     url(r'user_login', views.index, name="user_login"),
+    url(r'^signup/$', views.signup, name="signup"),
 ]
