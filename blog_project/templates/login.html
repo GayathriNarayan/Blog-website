@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+{% block title %}
+<title>login</title>
+{% endblock title %} 
+
+{% block body %}
+
+<center><h1>Login</h1></center>
+<form class="row g-6 my-5 container" method = 'POST' action = 'login'>
+  {% csrf_token %}
+  <div class="col-md-12">
+    <label for="inputEmail4" class="form-label">Username</label>
+    <input type="text" class="form-control" id="inputEmail4" name='username'/>
+  </div>
+  <div class="col-md-12">
+    <label for="inputPassword4" class="form-label">Password</label>
+    <input type="password" class="form-control" id="inputPassword4" name='password'/>
+  </div>
+
+
+  <div class="col-12">
+    <div class="form-check"></div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Login</button>
+  </div>
+</form>
+{% endblock body %}
