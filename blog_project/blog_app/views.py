@@ -48,7 +48,7 @@ def user_logout(request):
   
 #################################### BLOG PART #####################################################################
 #@login_required
-def Create_Blog(request):
+def create_blog(request):
     form = forms.New_Blog_Form(request.POST or None)
     if form.is_valid():
         form.save()
@@ -58,7 +58,7 @@ def Create_Blog(request):
 
 
 #@login_required
-def update_Blog(request, id):
+def update_blog(request, id):
     formblog= get_object_or_404(BlogPost, id=id)
     form = forms.New_Blog_Form(request.POST or None, instance=formblog)
     if form.is_valid():
@@ -69,7 +69,7 @@ def update_Blog(request, id):
 
  
 # delete view for details
-def delete_Blog(request, id):
+def delete_blog(request, id):
     formblog= get_object_or_404(BlogPost, id=id)    
     if request.method=='POST':
         formblog.delete()
