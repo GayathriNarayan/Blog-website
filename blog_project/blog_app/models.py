@@ -21,7 +21,7 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to = 'blog_pics', default='default_blog.jpg')
     
     def __str__(self):
-        return str(self.author) + " Blog Title: " + self.title
+        return " Blog Title: " + self.title
     
     def portfolio_site(self):
         return reverse('blogs')
