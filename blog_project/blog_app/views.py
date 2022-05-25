@@ -44,3 +44,35 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))      
+  
+  
+#################################### BLOG PART #####################################################################
+#@login_required
+def Create_Blog(request):
+    form = forms.New_Blog_Form(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    return render(request, 'miniblog/blog_manager.html', {'form':form})
+
+
+
+#@login_required
+def update_Blog(request, id):
+    formblog= get_object_or_404(BlogPost, id=id)
+    form = forms.New_Blog_Form(request.POST or None, instance=formblog)
+    if form.is_valid():
+       # form.image=request.FILES['image']
+        form.save()
+        return redirect('index')
+    return render(request, 'miniblog/update_blog.html', {'form':form})
+
+ 
+# delete view for details
+def delete_Blog(request, id):
+    formblog= get_object_or_404(BlogPost, id=id)    
+    if request.method=='POST':
+        formblog.delete()
+        return redirect('index')
+    return render(request,  'miniblog/delete_blog.html', {'form':formblog})  
+  
