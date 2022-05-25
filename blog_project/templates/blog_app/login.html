@@ -1,5 +1,5 @@
 {% extends 'blog_app/base.html' %}
-{% block title %}Login Page{% endblock %}
+{% block title %}Login{% endblock %}
 {% block body_block %}
 <form method="POST" action="{% url 'blog_app:user_login' %}">
     {% csrf_token %}

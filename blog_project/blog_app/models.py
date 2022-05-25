@@ -7,7 +7,7 @@ from django.urls import reverse
 class UserProfileInfo(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
     portfolio_site=models.URLField(blank=True)
-    profile_pic=models.ImageField(upload_to='profile_pics',default='default_profile.jpg')
+    profile_pic=models.ImageField(blank=True,upload_to='profile_pics',default='default_profile.jpg')
     bio = models.TextField(blank=True)
 
     def __str__(self):

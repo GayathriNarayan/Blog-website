@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from blog_app import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name='blog_app'
 
@@ -10,3 +12,5 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout,name='logout'),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
