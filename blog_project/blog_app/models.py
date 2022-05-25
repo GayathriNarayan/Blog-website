@@ -14,17 +14,11 @@ class UserProfileInfo(models.Model):
 
 #BlogPost table links to User table
 class BlogPost(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField(max_length=255)
     dateTime = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to = 'blog_pics', default='default_blog.jpg')
     
     def __str__(self):
-        return str(self.author) + " Blog Title: " + self.title
-    
-    def portfolio_site(self):
-        return reverse('blogs')
- 
-
-
+        return str(self.user) + " Blog Title: " + self.title
