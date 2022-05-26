@@ -1,17 +1,37 @@
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render
-
+from django.views.generic import ListView, DetailView
 from blog_app.forms import UserForm,UserProfileInfoForm,LoginForm
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
-from blog_app.models import User,UserProfileInfo
+from blog_app.models import User,UserProfileInfo,BlogPost
 from blog_project.settings import MEDIA_ROOT,MEDIA_URL
 from django.urls import reverse
 
-# Create your views here.
 
 def index(request):
   return render(request,'blog_app/index.html')
+
+
+"""
+Class to use inbuilt ListView object to dipslay list  of all Blogs 
+
+"""
+
+class BlogListView(ListView):
+  model = BlogPost
+  context_object_name = 'posts'
+  template_name = "blog_app/blog_list.html"
+
+"""
+Class to use inbuilt DetailView object to dipslay detail of particular Blog
+
+"""
+
+class BlogDetailView(DetailView):
+  model = BlogPost
+  context_object_name = 'post'
+  template_name = "blog_app/blog_detail.html"
 
 
 def signup(request):

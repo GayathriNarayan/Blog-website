@@ -1,0 +1,14 @@
+{% extends 'blog_app/base.html' %}
+
+{% block body_block %}
+
+<div class="row">
+    <div class="card">
+        <h5 class="card-header">{{ post.title }} by <span class="text-primary">{{ post.user }}</span></h5>
+        <div class="card-body">
+            <h5 class="card-title">Published: {{ post.dateTime }}</h5>
+            <p class="card-text">{{ post.content }}</p>
+        </div>
+    </div>
+</div> 
+{% endblock %}
