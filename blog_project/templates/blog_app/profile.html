@@ -1,0 +1,33 @@
+{% extends 'blog_app/base.html' %}
+{% block title %}My Profile{% endblock %}
+{% block body_block %}
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
+                    <div class="card-header justify-content-center">
+                        <h1 class="font-weight-light my-4 text-center">My Profile</h1>
+                    </div>
+                    <div class="card-body">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <img src="{{ media_url }}{{ profile_pic }}" alt="Not displayed" height='200' />
+                                    <p>Username : {{ username }}</p>
+                                    <p>First Name : {{ first_name }}</p>
+                                    <p>Last Name : {{ last_name }}</p>
+                                    <p>Email : {{ email }}</p>
+                                    <p>Portfolio Site : {{ portfolio_site }}</p>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
