@@ -7,20 +7,15 @@ from blog_app.models import UserProfileInfo, BlogPost
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     
-    class Meta():
+    class Meta:
         model = User
         fields = ('first_name','last_name','username', 'email', 'password')
     
 
 class UserProfileInfoForm(forms.ModelForm):
-    class Meta():
+    class Meta:
         model = UserProfileInfo
         fields = ('portfolio_site', 'profile_pic')
-
-class BlogPost(forms.ModelForm):
-    class Meta():
-        model = BlogPost
-        fields = ('title', 'content', 'image')
 class  LoginForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput())
 
@@ -43,6 +38,20 @@ class  LoginForm(forms.ModelForm):
         user = authenticate(username=username, password=password)
         return user
 
+class New_Blog_Form(forms.ModelForm):
+     class Meta:
+        model = BlogPost
+        fields = ['user', 'title', 'content', 'image']       
+
+class View_Blog_Form(forms.ModelForm):
+     class Meta:
+        model = BlogPost
+        fields =  ['user', 'title', 'content', 'image']     
+          
+        # make dateTime is readonly
+     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["dateTime"].widget.attrs["readonly"] = True
 
 
 

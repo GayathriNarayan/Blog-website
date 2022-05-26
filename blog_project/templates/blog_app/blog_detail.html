@@ -9,8 +9,8 @@
             <h5 class="card-title">Published: {{ post.dateTime }}</h5>
             <p class="card-text">{{ post.content }}</p>
             {% if user.id == post.user.id or user.is_superuser %}
-                <a href="{% url 'blog_app:blog_detail' post.id %}" class="btn btn-secondary">Edit</a>
-                <a href="{% url 'blog_app:blog_detail' post.id %}" class="btn btn-danger mx-4">Delete</a>
+                <a href="{% url 'blog_app:update_blog' post.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'blog_app:delete_blog' post.id %}" class="btn btn-danger mx-4">Delete</a>
             {% endif %}
 
         </div>

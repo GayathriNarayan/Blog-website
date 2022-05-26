@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from blog_app.views import BlogListView
 from blog_app import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,6 +24,7 @@ urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^blog_app/',include('blog_app.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^blog_list/$', BlogListView.as_view(), name="blog_list"),
 ]
 
 if settings.DEBUG:
