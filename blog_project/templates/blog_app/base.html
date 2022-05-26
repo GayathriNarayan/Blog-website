@@ -29,7 +29,7 @@
                     <ul class="navbar-nav mr-auto">
                         {% if user.is_authenticated %}
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{% url 'blog_app:blog_list' %}">Home <span class="sr-only">(current)</span></a>
                             </li>
 
                             <li class="nav-item">
@@ -37,7 +37,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">My Blogs</a>
+                                <a class="nav-link" href="{% url 'blog_app:blog_list' %}">My Blogs</a>
                             </li>
                             
                             <li class="nav-item">
@@ -59,6 +59,9 @@
                         {% endif %}
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
+                        {% if user.first_name %}
+                            <label class="font-weight-bold">Hi {{ user.first_name }} !!</label>
+                        {% endif %}
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
@@ -69,13 +72,13 @@
     <!---Navigation Bar ends--->
 
     <!---Content for other pages--->
-        <div class="container">
+        <div class="container my-4">
             {% block body_block %}
             {% endblock %}
         </div>
 
     <!---Footer start--->
-        <footer class="bg-light text-center text-lg-start">
+        <footer class="bg-light text-center text-lg-start fixed-bottom">
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
                 © 2022 Copyright:
