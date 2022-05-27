@@ -10,18 +10,16 @@
                         <h1 class="font-weight-light my-4 text-center">My Profile</h1>
                     </div>
                     <div class="card-body">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <img src="{{ media_url }}{{ profile_pic }}" alt="Not displayed" height='200' />
-                                    <p>Username : {{ username }}</p>
-                                    <p>First Name : {{ first_name }}</p>
-                                    <p>Last Name : {{ last_name }}</p>
-                                    <p>Email : {{ email }}</p>
-                                    <p>Portfolio Site : {{ portfolio_site }}</p>
-                                </div>
-                            </div>                            
+                        <img src="{{ media_url }}{{ user.userprofileinfo.profile_pic }}" alt="Not displayed" height='200' />
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-inline">
+                                <h1 class="d-inline-block card-title">{{ user.username }}</h1>
+                            </div>
+                            <div class="d-block">
+                                <p class="card-text">Name : {{ user.get_full_name }}</p>
+                                <p class="card-text">Email : {{ user.email }}</p>
+                                <p class="card-text">Portfolio Site : {{ user.userprofileinfo.portfolio_site }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,5 +27,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

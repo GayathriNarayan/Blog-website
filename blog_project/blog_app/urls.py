@@ -15,9 +15,9 @@ urlpatterns = [
     url(r'^delete_blog/(?P<id>\d+)/$', views.delete_blog ,name='delete_blog'),
     url(r'^update_blog/(?P<id>\d+)/$', views.update_blog ,name='update_blog'),
     url(r'^index/$', views.index,name='index'),
-    # url(r'^home/$', views.home,name='home'),
     url(r'^blog_list/$', BlogListView.as_view(), name="blog_list"),
     url(r'^blog_detail/(?P<pk>\d+)/$', BlogDetailView.as_view(), name="blog_detail"),
+    url(r'^profile/$', views.profile, name="profile"),
 ]
 
 if settings.DEBUG:

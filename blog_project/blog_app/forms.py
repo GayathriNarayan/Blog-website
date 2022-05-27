@@ -41,7 +41,7 @@ class  LoginForm(forms.ModelForm):
 class New_Blog_Form(forms.ModelForm):
      class Meta:
         model = BlogPost
-        fields = ['user', 'title', 'content', 'image']       
+        fields = ['title', 'content', 'image']       
 
 class View_Blog_Form(forms.ModelForm):
      class Meta:

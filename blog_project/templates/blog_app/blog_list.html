@@ -1,4 +1,5 @@
 {% extends 'blog_app/base.html' %}
+{% block title %}Blog{% endblock %}
 {% block body_block %}
 <div class="row">
     {% if posts %}
@@ -6,7 +7,7 @@
         <div class="col-sm-6 mt-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
+                    <h5 class="card-title">{{ post.title }} by {{ post.user.get_full_name }}</h5>
                     <p class="card-text">{{ post.content | truncatechars:50 }}</p>
                     <a href="{% url 'blog_app:blog_detail' post.id %}" class="btn btn-primary">Read more</a>
                 </div>
@@ -16,7 +17,7 @@
     {% else %}
         <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
             <div class="card-header justify-content-center">                                
-                <h2>No Blogs. Select <a href="#">Add Blog</a> to create your blog.</h2>                
+                <h2>No Blogs. Select <a href="{% url 'blog_app:create_blog' %}">Add Blog</a> to create your blog.</h2>                
             </div>
         </div>
     {% endif %}    

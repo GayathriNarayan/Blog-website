@@ -13,9 +13,7 @@ from django.shortcuts import get_object_or_404
 def index(request):
   return render(request,'blog_app/index.html')
 
-# @login_required
-# def home(request):
-#   return HttpResponseRedirect(reverse('blog_list'))
+
 
 """
 Class to use inbuilt ListView object to dipslay list  of all Blogs 
@@ -92,26 +90,6 @@ def user_login(request):
           userObj=User.objects.get(username=user.username)
           user_profile_info=UserProfileInfo.objects.filter(user=userObj).first()
           if userObj:
-              #Pass user object and user profile info object
-            # return render(request,'blog_app/blog_list.html',{
-            #                                   'user':user,
-            #                                   'user_profile_info':user_profile_info})
-            # portfolio_site=""
-            # profile_pic=""
-            
-            # if user_profile_info:
-            #   portfolio_site=user_profile_info.portfolio_site
-            #   profile_pic=user_profile_info.profile_pic
-              
-            # return render(request,'blog_app/profile.html',
-            #                             {'username':userObj.username,
-            #                             'first_name':user.first_name,
-            #                             'last_name':user.last_name,
-            #                             'email':userObj.email,
-            #                             'portfolio_site':portfolio_site,
-            #                             'profile_pic':profile_pic,
-            #                             'media_root':MEDIA_ROOT,
-            #                             'media_url':MEDIA_URL}) 
             return HttpResponseRedirect(reverse('blog_list'))
           
   return render(request,'blog_app/login.html',{'form':form})
@@ -126,8 +104,17 @@ def user_logout(request):
 def create_blog(request):
     form = New_Blog_Form(request.POST or None)
     if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('blog_list'))
+
+      blog = form.save(commit=False)
+      blog.user = request.user
+      
+      if 'image' in request.FILES:
+        blog.image = request.FILES['image']
+        
+      blog.save()
+
+        # form.save()
+      return HttpResponseRedirect(reverse('blog_list'))
     return render(request, 'blog_app/blog_manager.html', {'form':form})
 
 @login_required
@@ -136,9 +123,16 @@ def update_blog(request, id):
     form = New_Blog_Form(request.POST or None, instance=formblog)
     if form.is_valid():
        # form.image=request.FILES['image']
-        form.save()
-        return HttpResponseRedirect(reverse('blog_list'))
-    return render(request, 'blog_app/update_blog.html', {'form':form})
+      blog = form.save(commit=False)     
+      if 'image' in request.FILES:
+        blog.image = request.FILES['image']
+        
+      blog.save()
+      
+      return HttpResponseRedirect(reverse('blog_list'))
+    return render(request, 'blog_app/update_blog.html', {'form':form,
+                                                        'formblog':formblog,
+                                                        'media_url': MEDIA_URL})
 
 @login_required
 # delete view for details
@@ -148,3 +142,6 @@ def delete_blog(request, id):
         formblog.delete()
         return HttpResponseRedirect(reverse('blog_list'))
     return render(request,  'blog_app/delete_blog.html', {'form':formblog})  
+
+def profile(request):
+    return render(request, "blog_app/profile.html",{'media_url': MEDIA_URL})
