@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^blog_detail/(?P<pk>\d+)/$', BlogDetailView.as_view(), name="blog_detail"),
     url(r'^profile/$', views.profile, name="profile"),
     url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
+    url(r'^changepass/$', views.pass_change, name='changepass'),
 ]
 
 if settings.DEBUG:

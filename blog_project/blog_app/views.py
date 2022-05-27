@@ -8,8 +8,7 @@ from blog_app.models import User,UserProfileInfo,BlogPost
 from blog_project.settings import MEDIA_ROOT,MEDIA_URL
 from django.urls import reverse
 from django.contrib import messages
-
-
+from django.contrib.auth.forms import PasswordChangeForm
 # from django import forms
 from django.shortcuts import get_object_or_404
 
@@ -169,3 +168,15 @@ def edit_profile(request):
   else:
 
     return HttpResponseRedirect('blog_app/login')
+
+@login_required  #----Change Password:
+def pass_change(request):
+ if request.method == "POST":
+   pwd = PasswordChangeForm(user=request.user, data=request.POST)
+   print
+   if pwd.is_valid():
+     pwd.save()
+     messages.success(request, 'Your password has successfully changed !')
+ else:
+    pwd = PasswordChangeForm(user=request.user)
+ return render(request, 'blog_app/changepass.html', {'form':pwd})

@@ -20,7 +20,10 @@
                                 <p class="card-text">Email : {{ user.email }}</p>
                                 <p class="card-text">Portfolio Site : {{ user.userprofileinfo.portfolio_site }}</p>
                             </div>
-                            <a href="{% url 'blog_app:edit_profile' %}" class="btn btn-secondary">Edit</a>
+                            <div class="d-block">
+                                <a href="{% url 'blog_app:edit_profile' %}"><input class="btn btn-secondary" type="button" value="Edit Profile"></a>
+                                <a href="{% url 'blog_app:changepass' %}"><input class="btn btn-secondary" type="button" value="Change Password"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
