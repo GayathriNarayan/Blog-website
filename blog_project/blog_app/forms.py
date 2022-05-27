@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from blog_app.models import UserProfileInfo, BlogPost
-
+from django.contrib.auth.forms import UserChangeForm
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -53,7 +53,17 @@ class View_Blog_Form(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["dateTime"].widget.attrs["readonly"] = True
 
+#Edit Profile Form: starts below
+class EditUserProfileForm(UserChangeForm):
+    password = None
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+        labels = {'email': 'Email'}
 
+
+
+#Edit Profile Form: Ends Above
 
 
 

@@ -1,10 +1,10 @@
 {% extends 'blog_app/base.html' %}
 {% block title %}Blog{% endblock %}
 {% block body_block %}
-
 <div class="row">
-    <div class="card">
+    <div class="card" style="width:50rem">
         <h5 class="card-header">{{ post.title }} by <span class="text-primary">{{ post.user.get_full_name }}</span></h5>
+        <img src="/media/{{post.image}}" class="card-img-top" alt="No image to display" height="100px">
         <div class="card-body">
             <h5 class="card-title">Published: {{ post.dateTime }}</h5>
             <p class="card-text">{{ post.content }}</p>
@@ -12,7 +12,7 @@
                 <a href="{% url 'blog_app:update_blog' post.id %}" class="btn btn-primary">Edit</a>
                 <a href="{% url 'blog_app:delete_blog' post.id %}" class="btn btn-danger mx-4">Delete</a>
             {% endif %}
-
+                <a href="javascript:history.go(-1)" class="btn btn-secondary">Back</a>            
         </div>
     </div>
 </div> 

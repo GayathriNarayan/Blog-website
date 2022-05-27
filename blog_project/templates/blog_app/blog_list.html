@@ -5,7 +5,8 @@
     {% if posts %}
         {% for post in posts %}
         <div class="col-sm-6 mt-4">
-            <div class="card">
+            <div class="card" style="width: 28rem;">
+                <img src="/media/{{post.image}}" class="card-img-top" alt="No image to display" height="200px">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }} by {{ post.user.get_full_name }}</h5>
                     <p class="card-text">{{ post.content | truncatechars:50 }}</p>

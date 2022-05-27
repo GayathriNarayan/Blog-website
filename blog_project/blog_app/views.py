@@ -1,12 +1,15 @@
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.views.generic import ListView, DetailView
-from blog_app.forms import UserForm,UserProfileInfoForm,LoginForm,New_Blog_Form
+from blog_app.forms import UserForm,UserProfileInfoForm,LoginForm,New_Blog_Form,EditUserProfileForm
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 from blog_app.models import User,UserProfileInfo,BlogPost
 from blog_project.settings import MEDIA_ROOT,MEDIA_URL
 from django.urls import reverse
+from django.contrib import messages
+
+
 # from django import forms
 from django.shortcuts import get_object_or_404
 
@@ -143,5 +146,26 @@ def delete_blog(request, id):
         return HttpResponseRedirect(reverse('blog_list'))
     return render(request,  'blog_app/delete_blog.html', {'form':formblog})  
 
+@login_required
 def profile(request):
     return render(request, "blog_app/profile.html",{'media_url': MEDIA_URL})
+
+#edit profile----
+@login_required
+def edit_profile(request):
+
+  if request.user.is_authenticated:
+    if request.method == "POST":
+      usr = EditUserProfileForm(request.POST, instance=request.user)
+      if usr.is_valid():
+        messages.success(request, 'your profile has been updated !')
+        usr.save()
+    else:
+     usr = EditUserProfileForm(instance=request.user)
+    return render(request, 'blog_app/edit_profile.html', {'name': request.user, 
+                                                    'form':usr,
+                                                    'media_url': MEDIA_URL})
+
+  else:
+
+    return HttpResponseRedirect('blog_app/login')

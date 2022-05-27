@@ -1,39 +1,39 @@
 {% extends "blog_app/base.html" %}
 {% load staticfiles %}
-{% block title %}Sign Up{% endblock %}
+{% block title %}Sign up{% endblock %}
 {% block body_block %}
 <div class="form-content my-3 p-3">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
-                    {% if registered %}
-                    <div class="card-header justify-content-center">                        
-                        <h1>Thank you for Sign Up</h1>
+                    <div class="card-header justify-content-center">
+                        {% if registered %}
+                        <h1>Thank you for Sign up</h1>
+                        {% else %}
+                        <h1 class="font-weight-light my-4 text-center">Sign up</h1>
                     </div>
-                    {% else %}
-                        <div class="card-header justify-content-center">
-                            <h1 class="font-weight-light my-4 text-center">Sign up</h1>
-                        </div>
-                        <div class="card-body">
-                            <form enctype="multipart/form-data" method="POST">
-                                {% csrf_token %}
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {{ user_form.as_p }}
-                                            {{ profile_form.as_p }}
-                                        </div>
+                    <div class="card-body">
+                        <form enctype="multipart/form-data" method="POST" novalidate>
+                            {% csrf_token %}
+                            <div class="form-row my-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{ user_form.as_p }}
+                                        {{ profile_form.as_p }}
                                     </div>
-                                    <input class="col-md-12 btn btn-dark" type="submit" value="Signup">
                                 </div>
-                            </form>
-                        </div>
-                        {% endif %}                        
+                            </div>
+                            <input class="col-md-12 btn btn-dark" type="submit" value="Signup">
+                        </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.getElementsByClassName('helptext')[0].innerHTML = ""
+</script>
 {% endblock %}
